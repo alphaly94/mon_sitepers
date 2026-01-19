@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Dépannage Téléphone PC Tablette à domicile</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff}
 header{background:#000;color:#f5c400;padding:20px;text-align:center}
@@ -22,6 +23,12 @@ button{padding:14px 18px;border:none;border-radius:10px;font-size:16px;cursor:po
 .simulator{background:#111;border-radius:14px;padding:25px;box-shadow:0 10px 25px rgba(0,0,0,.5);max-width:420px;margin:30px auto;color:#fff}
 select{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px solid #f5c400;font-size:16px;background:#000;color:#fff}
 #price{margin-top:15px;font-size:22px;font-weight:bold;color:#f5c400}
+
+/* Hover et focus subtils */
+button:hover{transform:scale(1.05);transition:all 0.3s ease}
+input:focus, textarea:focus, select:focus{border:2px solid #f5c400;box-shadow:0 0 10px rgba(245,196,0,0.4);outline:none}
+
+/* Boutons flottants (optionnels) */
 .call-float,.whatsapp-float{position:fixed;right:20px;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;text-decoration:none;box-shadow:0 10px 20px rgba(0,0,0,.3);z-index:999}
 .call-float{bottom:20px;background:#000}
 .whatsapp-float{bottom:90px;background:#25D366}
@@ -32,37 +39,46 @@ select{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px soli
 <h1>DÉPANNAGE TÉLÉPHONE · TABLETTE · ORDINATEUR</h1>
 <p>À domicile – Rapide – Professionnel</p>
 </header>
+
 <div class="section">
 <div class="badges">
 <div class="badge">✅ Devis gratuit</div>
 <div class="badge">✅ Paiement après réparation</div>
 <div class="badge">✅ Intervention à domicile</div>
 </div>
-</div>
-<div class="section">
-<h2 style="text-align:center">📱 Votre écran est cassé ?</h2>
-<div class="simulator">
-<select id="brand" onchange="loadModels()">
-<option value="">Choisir une marque</option>
-<option value="iphone">iPhone</option>
-<option value="samsung">Samsung</option>
-<option value="autre">Autre</option>
-</select>
-<select id="model" onchange="showPrice()">
-<option value="">Choisir un modèle</option>
-</select>
-<div id="price"></div>
-<button class="btn-wa" onclick="sendWhatsApp()">💬 Devis immédiat WhatsApp</button>
-<button class="btn-call" onclick="callNow()">📞 Appeler maintenant</button>
-</div>
-</div>
-<div class="section">
-<div class="cards">
+
+
+<div class="section cards">
 <div class="card" onclick="showTarifs('pc')">💻 Un PC lent ?</div>
 <div class="card" onclick="showTarifs('mobile')">📱 Téléphone / Tablette cassé ?</div>
 <div class="card" onclick="showTarifs('contact')">⏰ Pas le temps d’aller en magasin ?</div>
 </div>
+
+
+
+<!-- Simulateur -->
+<h2 style="text-align:center">📱 Votre écran est cassé ?</h2>
+<div class="simulator">
+  <select id="brand" onchange="loadModels()">
+    <option value="">Choisir une marque</option>
+    <option value="iphone">iPhone</option>
+    <option value="samsung">Samsung</option>
+    <option value="autre">Autre</option>
+  </select>
+  <select id="model" onchange="showPrice()">
+    <option value="">Choisir un modèle</option>
+  </select>
+  <div id="price"></div>
 </div>
+</div>
+
+<!-- Boutons principaux -->
+<div style="display:flex;justify-content:center;gap:15px;margin:20px 0;flex-wrap:wrap;">
+  <button class="btn-call" onclick="callNow()">📞 Appeler maintenant</button>
+  <button class="btn-wa" onclick="sendWhatsApp()">💬 WhatsApp maintenant</button>
+  <button class="btn" onclick="showTarifs('contact')">📅 Prendre RDV</button>
+</div>
+
 <div class="section tarifs" id="pc">
 <h2>Tarifs Dépannage PC</h2>
 <div class="price-row"><span>Diagnostic</span><span>20 €</span></div>
@@ -71,6 +87,7 @@ select{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px soli
 <div class="price-row"><span>Réinstallation Windows</span><span>80 €</span></div>
 <button class="btn-call" onclick="callNow()">📞 Appeler maintenant</button>
 </div>
+
 <div class="section tarifs" id="mobile">
 <h2>Tarifs Téléphone</h2>
 <div class="price-row"><span>Remplacement écran</span><span>à partir de 70 €</span></div>
@@ -81,17 +98,21 @@ select{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px soli
 <div class="price-row"><span>Changement batterie</span><span>à partir de 70 €</span></div>
 <button class="btn-call" onclick="callNow()">📞 Appeler maintenant</button>
 </div>
+
 <div class="section tarifs" id="contact">
 <h2>Contact rapide</h2>
 <form action="mailto:alformatiquedirection@gmail.com" method="post" enctype="text/plain">
-<input placeholder="Nom" name="Nom" required style="width:100%;padding:12px;margin:10px 0">
-<input placeholder="Téléphone" name="Téléphone" required style="width:100%;padding:12px;margin:10px 0">
-<textarea placeholder="Décrivez votre problème" name="Message" required style="width:100%;padding:12px;margin:10px 0"></textarea>
+<input placeholder="Nom" name="Nom" required>
+<input placeholder="Téléphone" name="Téléphone" required>
+<textarea placeholder="Décrivez votre problème" name="Message" required></textarea>
 <button class="btn-wa" type="submit">📨 Envoyer</button>
 </form>
 </div>
+
+<!-- Boutons flottants (optionnels) -->
 <a href="https://wa.me/33759308014" target="_blank" class="whatsapp-float">💬</a>
 <a href="tel:+33759308014" class="call-float">📞</a>
+
 <script>
 const models={iphone:{"iPhone 11":89,"iPhone 12":109,"iPhone 13":129,"iPhone 14":159},samsung:{"Galaxy S21":119,"Galaxy S22":139,"Galaxy S23":169},autre:{"Xiaomi":99,"Huawei":109,"Oppo":119}};
 let selectedBrand="",selectedModel="",selectedPrice="";
