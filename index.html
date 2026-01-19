@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Dépannage Téléphone PC Tablette à domicile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff}
+header{background:#000;color:#f5c400;padding:20px;text-align:center}
+.section{padding:40px 20px;max-width:1000px;margin:auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{background:#111;border-radius:14px;padding:25px;box-shadow:0 10px 25px rgba(0,0,0,.5);cursor:pointer;transition:.3s;color:#fff}
+.card:hover{transform:translateY(-5px)}
+.badges{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.badge{background:#f5c400;color:#000;padding:10px 18px;border-radius:30px;font-weight:bold}
+button{padding:14px 18px;border:none;border-radius:10px;font-size:16px;cursor:pointer;background:#f5c400;color:#000;font-weight:bold}
+.btn-call{background:#000;color:#f5c400;width:100%;margin-top:15px;border:2px solid #f5c400}
+.btn-wa{background:#25D366;color:#fff;width:100%;margin-top:10px}
+.tarifs{display:none}
+.tarifs.active{display:block}
+.price-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #ddd}
+.simulator{background:#111;border-radius:14px;padding:25px;box-shadow:0 10px 25px rgba(0,0,0,.5);max-width:420px;margin:30px auto;color:#fff}
+select{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px solid #f5c400;font-size:16px;background:#000;color:#fff}
+#price{margin-top:15px;font-size:22px;font-weight:bold;color:#f5c400}
+.call-float,.whatsapp-float{position:fixed;right:20px;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;text-decoration:none;box-shadow:0 10px 20px rgba(0,0,0,.3);z-index:999}
+.call-float{bottom:20px;background:#000}
+.whatsapp-float{bottom:90px;background:#25D366}
+</style>
+</head>
+<body>
+<header>
+<h1>DÉPANNAGE TÉLÉPHONE · TABLETTE · ORDINATEUR</h1>
+<p>À domicile – Rapide – Professionnel</p>
+</header>
+<div class="section">
+<div class="badges">
+<div class="badge">✅ Devis gratuit</div>
+<div class="badge">✅ Paiement après réparation</div>
+<div class="badge">✅ Intervention à domicile</div>
+</div>
+</div>
+<div class="section">
+<h2 style="text-align:center">📱 Votre écran est cassé ?</h2>
+<div class="simulator">
+<select id="brand" onchange="loadModels()">
+<option value="">Choisir une marque</option>
+<option value="iphone">iPhone</option>
+<option value="samsung">Samsung</option>
+<option value="autre">Autre</option>
+</select>
+<select id="model" onchange="showPrice()">
+<option value="">Choisir un modèle</option>
+</select>
+<div id="price"></div>
+<button class="btn-wa" onclick="sendWhatsApp()">💬 Devis immédiat WhatsApp</button>
+<button class="btn-call" onclick="callNow()">📞 Appeler maintenant</button>
+</div>
+</div>
+<div class="section">
+<div class="cards">
+<div class="card" onclick="showTarifs('pc')">💻 Un PC lent ?</div>
+<div class="card" onclick="showTarifs('mobile')">📱 Téléphone / Tablette cassé ?</div>
+<div class="card" onclick="showTarifs('contact')">⏰ Pas le temps d’aller en magasin ?</div>
+</div>
+</div>
+<div class="section tarifs" id="pc">
+<h2>Tarifs Dépannage PC</h2>
+<div class="price-row"><span>Diagnostic</span><span>20 €</span></div>
+<div class="price-row"><span>Nettoyage + optimisation</span><span>50 €</span></div>
+<div class="price-row"><span>Suppression virus</span><span>60 €</span></div>
+<div class="price-row"><span>Réinstallation Windows</span><span>80 €</span></div>
+<button class="btn-call" onclick="callNow()">📞 Appeler maintenant</button>
+</div>
+<div class="section tarifs" id="mobile">
+<h2>Tarifs Téléphone</h2>
+<div class="price-row"><span>Remplacement écran</span><span>à partir de 70 €</span></div>
+<div class="price-row"><span>Changement batterie</span><span>à partir de 50 €</span></div>
+<div class="price-row"><span>Connecteur de charge</span><span>à partir de 60 €</span></div>
+<h2 style="margin-top:30px">Tarifs Tablette</h2>
+<div class="price-row"><span>Remplacement écran</span><span>à partir de 90 €</span></div>
+<div class="price-row"><span>Changement batterie</span><span>à partir de 70 €</span></div>
+<button class="btn-call" onclick="callNow()">📞 Appeler maintenant</button>
+</div>
+<div class="section tarifs" id="contact">
+<h2>Contact rapide</h2>
+<form action="mailto:alformatiquedirection@gmail.com" method="post" enctype="text/plain">
+<input placeholder="Nom" name="Nom" required style="width:100%;padding:12px;margin:10px 0">
+<input placeholder="Téléphone" name="Téléphone" required style="width:100%;padding:12px;margin:10px 0">
+<textarea placeholder="Décrivez votre problème" name="Message" required style="width:100%;padding:12px;margin:10px 0"></textarea>
+<button class="btn-wa" type="submit">📨 Envoyer</button>
+</form>
+</div>
+<a href="https://wa.me/33759308014" target="_blank" class="whatsapp-float">💬</a>
+<a href="tel:+33759308014" class="call-float">📞</a>
+<script>
+const models={iphone:{"iPhone 11":89,"iPhone 12":109,"iPhone 13":129,"iPhone 14":159},samsung:{"Galaxy S21":119,"Galaxy S22":139,"Galaxy S23":169},autre:{"Xiaomi":99,"Huawei":109,"Oppo":119}};
+let selectedBrand="",selectedModel="",selectedPrice="";
+function loadModels(){const brand=document.getElementById('brand').value;selectedBrand=brand;const modelSelect=document.getElementById('model');modelSelect.innerHTML='<option value="">Choisir un modèle</option>';if(models[brand]){Object.keys(models[brand]).forEach(m=>{const opt=document.createElement('option');opt.value=m;opt.textContent=m;modelSelect.appendChild(opt);});}}
+function showPrice(){const brand=document.getElementById('brand').value;const model=document.getElementById('model').value;selectedModel=model;if(brand&&model){const price=models[brand][model];selectedPrice=price;document.getElementById('price').textContent='Prix estimé : '+price+' €';}}
+function sendWhatsApp(){if(!selectedBrand||!selectedModel){alert('Veuillez choisir une marque et un modèle');return;}const msg=`Bonjour, je souhaite un devis pour une réparation d'écran.%0AMarque: ${selectedBrand}%0AModèle: ${selectedModel}%0APrix estimé: ${selectedPrice} €`;window.open(`https://wa.me/33759308014?text=${msg}`,'_blank');}
+function callNow(){window.location.href='tel:+33759308014';}
+function showTarifs(id){document.querySelectorAll('.tarifs').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:document.getElementById(id).offsetTop-20,behavior:'smooth'});}
+</script>
+</body>
+</html>
