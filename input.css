@@ -1,0 +1,100 @@
+.about-box {
+  background: #111;
+  border-radius: 16px;
+  padding: 25px 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.5);
+  max-width: 900px;
+  margin: 20px auto;
+  line-height: 1.7;
+}
+
+.about-box p {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.about-box ul {
+  margin: 15px 0 20px 20px;
+}
+
+.about-box li {
+  margin-bottom: 10px;
+}
+
+.about-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+/* ===== Fix lisibilité page À propos ===== */
+
+body {
+  background: #0b0b0b; /* fond sombre uniforme */
+}
+
+/* Conteneur principal de la page À propos */
+.about-box {
+  background: #ffffff;  /* fond blanc */
+  color: #111111;       /* texte noir */
+  border-radius: 15px;
+  padding: 25px;
+  max-width: 800px;
+  margin: 30px auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Paragraphes & listes */
+.about-box p,
+.about-box li {
+  color: #111111;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* Titres */
+.about-box h1,
+.about-box h2,
+.about-box h3 {
+  color: #000000;
+}
+
+/* Boutons dans À propos */
+.about-buttons .btn-call,
+.about-buttons .btn-wa {
+  background: #ffd700;
+  color: #000;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.about-buttons .btn-call:hover,
+.about-buttons .btn-wa:hover {
+  background: #e6c200;
+}
+
+/* Boutons lien (À propos / Retour) */
+.btn-about,
+.btn-back {
+  display: inline-block;
+  background: transparent;
+  color: #ffd700;
+  border: 2px solid #ffd700;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.btn-about:hover,
+.btn-back:hover {
+  background: #ffd700;
+  color: #000;
+}
+
