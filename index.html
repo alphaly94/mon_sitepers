@@ -2,150 +2,281 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Dépannage Téléphone PC Tablette à domicile</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dépannage Téléphone PC Tablette & Création de Site</title>
+<link rel="stylesheet" href="style.html">
 
 <style>
-body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff}
-header{background:#000;color:#f5c400;padding:20px;text-align:center}
-.section{padding:40px 20px;max-width:1000px;margin:auto}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.card{background:#111;border-radius:14px;padding:25px;box-shadow:0 10px 25px rgba(0,0,0,.5);cursor:pointer;transition:.3s;color:#fff}
-.card:hover{transform:translateY(-5px)}
-.badges{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin:20px 0}
-.badge{background:#f5c400;color:#000;padding:10px 18px;border-radius:30px;font-weight:bold}
-button{padding:14px 18px;border:none;border-radius:10px;font-size:16px;cursor:pointer;background:#f5c400;color:#000;font-weight:bold}
-.btn-call{background:#000;color:#f5c400;width:50%;margin-top:15px;border:2px solid #f5c400}
-.btn-wa{background:#25D366;color:#fff;width:50%;margin-top:10px}
-.tarifs{display:none}
-.tarifs.active{display:block}
-.price-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #ddd}
-.simulator{background:#111;border-radius:14px;padding:25px;box-shadow:0 10px 25px rgba(0,0,0,.5);max-width:420px;margin:30px auto;color:#fff}
-select{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px solid #f5c400;font-size:16px;background:#000;color:#fff}
+/* ===== RESET ET BASE ===== */
+body { margin: 0; font-family: Arial, sans-serif; background: #0b0b0b; color: #fff; }
+header { background: #000; color: #f5c400; padding: 20px; text-align: center; }
+.section { padding: 40px 20px; max-width: 1000px; margin: auto; }
+
+/* ===== BADGES ===== */
+.badges { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+.badge { background: #f5c400; color: #000; padding: 10px 18px; border-radius: 30px; font-weight: bold; }
+.whatsapp-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #25d366;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 50px;
+  padding: 14px 20px;
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+.whatsapp-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #25d366;
+  border-radius: 50px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.1);
+  background-color: #1ebe57;
+}
+
+.whatsapp-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+/* ===== BOUTONS ===== */
+button, .btn { border-radius: 30px; border: 3px solid #f5c400; padding: 16px 24px; font-size: 18px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+button:hover, .btn:hover { background-color: #f5c400; color: #000; transform: scale(1.08); }
+
+/* ===== BOUTONS DE SERVICE ===== */
+.service-button-wrapper { position: relative; display: inline-block; margin: 12px; }
+.service-btn { border-radius: 30px; border: 3px solid #f5c400; background: #000; color: #f5c400; padding: 16px 24px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+.service-btn:hover { box-shadow: 0 0 0 2px #f5c400, 0 10px 30px rgba(245,196,0,.3); }
+
+/* ===== TOOLTIP ===== */
+.service-tooltip { position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%); background: #1f1f1f; color: #fff; padding: 8px 14px; border-radius: 10px; font-size: 13px; white-space: nowrap; opacity: 0; pointer-events: none; transition: all 0.25s ease; border: 1px solid #f5c400; box-shadow: 0 6px 18px rgba(0,0,0,0.4); z-index: 1000; }
+.service-tooltip::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 6px; border-style: solid; border-color: #1f1f1f transparent transparent transparent; }
+.service-button-wrapper:hover .service-tooltip { opacity: 1; transform: translateX(-50%) translateY(-6px); }
+
+/* ===== PRICE BOX ===== */
+.price-box { display: none; margin: 30px auto 0 auto; padding: 25px 30px; max-width: 900px; background: #111; border: 2px solid #f5c400; border-radius: 18px; box-shadow: 0 15px 40px rgba(0,0,0,.7); color: #fff; animation: fadeIn 0.25s ease; }
+.price-box h3, .price-box h1, .price-box h2 { margin-bottom: 15px; font-size: 24px; color: #f5c400; text-align: center; }
+.price-box ul { list-style: none; padding: 0; margin: 0; }
+.price-box li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.1); font-size: 16px; }
+.price-box li:last-child { border-bottom: none; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ===== SIMULATEUR ===== */
+.simulator { background:#111; border-radius:14px; padding:25px; box-shadow:0 10px 25px rgba(0,0,0,.5); max-width:420px; margin:30px auto; color:#fff; }
+select {width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px solid #f5c400;font-size:16px;background:#000;color:#fff}
 #price{margin-top:15px;font-size:22px;font-weight:bold;color:#f5c400}
 
-/* Hover et focus subtils */
-button:hover{transform:scale(1.05);transition:all 0.3s ease}
-input:focus, textarea:focus, select:focus{border:2px solid #f5c400;box-shadow:0 0 10px rgba(245,196,0,0.4);outline:none}
+/* ===== FORMULAIRE ===== */
+.contact { max-width: 800px; margin: 60px auto; padding: 50px 45px; background: linear-gradient(180deg, #111, #000); border-radius: 24px; border: 3px solid #f5c400; box-shadow: 0 25px 60px rgba(0,0,0,.8); color: #fff; }
+.contact h2 { text-align: center; margin-bottom: 35px; font-size: 28px; color: #f5c400; letter-spacing: 1px; }
+#contactForm input, #contactForm textarea { width: 100%; box-sizing: border-box; padding: 18px 18px; border-radius: 14px; border: 2px solid #333; font-size: 17px; background: #000; color: #fff; outline: none; margin-bottom: 20px; transition: all 0.25s ease; }
+#contactForm input::placeholder, #contactForm textarea::placeholder { color: #777; }
+#contactForm input:focus, #contactForm textarea:focus { border-color: #f5c400; box-shadow: 0 0 0 3px rgba(245,196,0,.35); }
+#contactForm textarea { min-height: 140px; resize: vertical; }
+.btn-primary { display: block; width: 100%; padding: 18px; border-radius: 40px; border: 3px solid #f5c400; background: #000; color: #f5c400; font-size: 20px; font-weight: bold; cursor: pointer; transition: all 0.25s ease; }
+.btn-primary:hover { background: #f5c400; color: #000; transform: translateY(-3px); }
+.form-status { margin-top: 20px; font-weight: bold; text-align: center; padding: 14px; border-radius: 12px; display: none; }
+.form-status.success { display: block; background: #1f7a1f; color: #fff; }
+.form-status.error { display: block; background: #a30000; color: #fff; }
+.form-status.loading { display: block; background: #222; color: #f5c400; }
 
-/* Style des boutons principaux pour plus de visibilité */
-button.btn-call, 
-button.btn-wa, 
-button.btn {
-    border-radius: 30px;          /* coins très arrondis */
-    border: 3px solid #f5c400;    /* bordure jaune vif */
-    padding: 16px 24px;           /* plus de padding pour le bouton */
-    font-size: 18px;               /* texte un peu plus grand */
-    font-weight: bold;             /* texte plus visible */
-    transition: all 0.3s ease;    /* animation hover */
-}
-
-/* Hover pour effet interactif */
-button.btn-call:hover,
-button.btn-wa:hover,
-button.btn:hover {
-    background-color: #f5c400;    /* inverse couleur au survol */
-    color: #000;
-    transform: scale(1.08);       /* léger zoom */
-}
-
-/* Boutons flottants (optionnels) */
-.call-float,.whatsapp-float{position:fixed;right:20px;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;text-decoration:none;box-shadow:0 10px 20px rgba(0,0,0,.3);z-index:999}
-.call-float{bottom:20px;background:#000}
-.whatsapp-float{bottom:90px;background:#25D366}
+/* ===== FOOTER ===== */
+footer { background:#000; color:#f5c400; padding:30px 20px; text-align:center; margin-top:40px; }
+footer p {margin:5px 0; font-size:16px;}
 </style>
 </head>
 <body>
+
 <header>
-<h1>DÉPANNAGE TÉLÉPHONE · TABLETTE · ORDINATEUR</h1>
-<p>À domicile – Rapide – Professionnel</p>
+  <h1>DÉPANNAGE TÉLÉPHONE · TABLETTE · ORDI · SITE WEB</h1>
+  <p>À domicile – Rapide – Professionnel</p>
 </header>
 
 <div class="section">
-<div class="badges">
-<div class="badge">✅ Devis gratuit</div>
-<div class="badge">✅ Paiement après réparation</div>
-<div class="badge">✅ Intervention à domicile</div>
-</div>
- <div style="text-align:center; margin-top:20px;">
-    <a href="style.html" class="card btn-back" style="display:inline-block; text-decoration:none; padding:10px 20px; background:#f5c400; color:#000; border-radius:30px; font-weight:bold;">
-      👨‍💻 À propos de moi
-    </a>
-     </div>
+  <div style="text-align:center; margin:40px 0;">
+    <div class="badges">
+      <div class="badge">✅ Devis gratuit</div>
+      <div class="badge">✅ Paiement après réparation</div>
+      <div class="badge">✅ Intervention à domicile</div>
+    </div>
+  </div>
 
-<div class="section cards">
-<div class="card" onclick="showTarifs('pc')">💻 Un PC lent ?</div>
-<div class="card" onclick="showTarifs('mobile')">📱 Téléphone / Tablette cassé ?</div>
-<div class="card" onclick="showTarifs('contact')">⏰ Pas le temps d’aller en magasin ?</div>
-</div>
+  <!-- Boutons services -->
+  <div style="text-align:center; margin:40px 0;">
+    <div class="service-button-wrapper"><button class="service-btn" onclick="togglePrices('pc')">🖥️ PC Portable</button></div>
+    <div class="service-button-wrapper"><button class="service-btn" onclick="togglePrices('mobile')">📱 Téléphonie/Tablette</button></div>
+    <div class="service-button-wrapper"><button class="service-btn" onclick="togglePrices('prix-siteweb')">🌐 Création de site web</button></div>
+    <div class="service-button-wrapper"><a href="style.html" class="btn-primary">👨‍💻 À propos de moi</a></div>
+  </div>
 
-
-
-<!-- Simulateur -->
-<h2 style="text-align:center">📱 Votre écran est cassé ?</h2>
-<div class="simulator">
-  <select id="brand" onchange="loadModels()">
-    <option value="">Choisir une marque</option>
-    <option value="iphone">iPhone</option>
-    <option value="samsung">Samsung</option>
-    <option value="autre">Autre</option>
-  </select>
-  <select id="model" onchange="showPrice()">
-    <option value="">Choisir un modèle</option>
-  </select>
-  <div id="price"></div>
-</div>
+  <!-- Simulateur -->
+  <h2 style="text-align:center">📱 Votre écran est cassé ?</h2>
+  <div class="simulator">
+    <select id="brand" onchange="loadModels()">
+      <option value="">Choisir une marque</option>
+      <option value="iphone">iPhone</option>
+      <option value="samsung">Samsung</option>
+      <option value="autre">Autre</option>
+    </select>
+    <select id="model" onchange="showPrice()"><option value="">Choisir un modèle</option></select>
+    <div id="price"></div>
+  </div>
 </div>
 
-<!-- Boutons principaux -->
-<div style="display:flex;justify-content:center;gap:15px;margin:20px 0;flex-wrap:wrap;">
-  <button class="btn-call" onclick="callNow()">📞 Appeler maintenant</button>
-  <button class="btn-wa" onclick="sendWhatsApp()">💬 WhatsApp maintenant</button>
-  <button class="btn" onclick="showTarifs('contact')">📅 Prendre RDV</button>
+<!-- Tarifs -->
+<div id="pc" class="price-box">
+  <h2 style="margin-top:30px;">Tarifs Dépannage PC</h2>
+  <ul>
+    <li>Diagnostic à partir de 20 €</li>
+    <li>Nettoyage + optimisation à partir de 50 €</li>
+    <li>Suppression virus à partir de 60 €</li>
+    <li>Réinstallation Windows à partir de 80 €</li>
+  </ul>
 </div>
 
-<div class="section tarifs" id="pc">
-<h2>Tarifs Dépannage PC</h2>
-<div class="price-row"><span>Diagnostic</span><span>20 €</span></div>
-<div class="price-row"><span>Nettoyage + optimisation</span><span>50 €</span></div>
-<div class="price-row"><span>Suppression virus</span><span>60 €</span></div>
-<div class="price-row"><span>Réinstallation Windows</span><span>80 €</span></div>
-<button class="btn-call" onclick="callNow()">📞 Appeler maintenant</button>
+<div id="mobile" class="price-box">
+  <h2>Tarifs Téléphone</h2>
+  <ul>
+    <li>écran à partir de 70 €</li>
+    <li>Changement batterie à partir de 50 €</li>
+    <li>Connecteur de charge à partir de 60 €</li>
+  </ul>
+  <h2 style="margin-top:30px;">Tarifs Tablette</h2>
+  <ul>
+    <li>Remplacement écran à partir de 90 €</li>
+    <li>Changement batterie à partir de 70 €</li>
+  </ul>
 </div>
 
-<div class="section tarifs" id="mobile">
-<h2>Tarifs Téléphone</h2>
-<div class="price-row"><span>Remplacement écran</span><span>à partir de 70 €</span></div>
-<div class="price-row"><span>Changement batterie</span><span>à partir de 50 €</span></div>
-<div class="price-row"><span>Connecteur de charge</span><span>à partir de 60 €</span></div>
-<h2 style="margin-top:30px">Tarifs Tablette</h2>
-<div class="price-row"><span>Remplacement écran</span><span>à partir de 90 €</span></div>
-<div class="price-row"><span>Changement batterie</span><span>à partir de 70 €</span></div>
-<button class="btn-call" onclick="callNow()">📞 Appeler maintenant</button>
+<div id="prix-siteweb" class="price-box">
+  <h3>Création de site web</h3>
+  <ul>
+    <li>Site vitrine 1 page : <strong>199€</strong></li>
+    <li>Site vitrine 3–5 pages : <strong>349€</strong></li>
+    <li>Site pro (jusqu’à 10 pages) : <strong>599€</strong></li>
+    <li>Site e-commerce (catalogue simple) : <strong>899€</strong></li>
+    <li>Maintenance mensuelle : <strong>29€ / mois</strong></li>
+  </ul>
 </div>
 
-<div class="section tarifs" id="contact">
-<h2>Contact rapide</h2>
-<form action="mailto:alformatiquedirection@gmail.com" method="post" enctype="text/plain">
-<input placeholder="Nom" name="Nom" required>
-<input placeholder="Téléphone" name="Téléphone" required>
-<textarea placeholder="Décrivez votre problème" name="Message" required></textarea>
-<button class="btn-wa" type="submit">📨 Envoyer</button>
-</form>
-</div>
+<section id="contact" class="contact fade-in">
+  <h2>Contactez</h2>
+  <form id="contactForm">
+    <input type="text" id="name" placeholder="Nom" required />
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="tel" id="phone" placeholder="Téléphone" required />
+    <textarea id="message" placeholder="Votre message" required></textarea>
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+    <div class="form-status" id="formStatus"></div>
+  </form>
+</section>
 
-<!-- Boutons flottants (optionnels) -->
-<a href="https://wa.me/33759308014" target="_blank" class="whatsapp-float">💬</a>
-<a href="tel:+33759308014" class="call-float">📞</a>
+<!-- FOOTER -->
+<footer>
+  <p><strong>Alformatique</strong></p>
+  <p>0759308014</p>
+  <p>Email : alfomatiquedirection@gmail.com</p>
+  <p>Région: Ile de France</p>
+</footer>
 
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-const models={iphone:{"iPhone 11":89,"iPhone 12":109,"iPhone 13":129,"iPhone 14":159},samsung:{"Galaxy S21":119,"Galaxy S22":139,"Galaxy S23":169},autre:{"Xiaomi":99,"Huawei":109,"Oppo":119}};
-let selectedBrand="",selectedModel="",selectedPrice="";
-function loadModels(){const brand=document.getElementById('brand').value;selectedBrand=brand;const modelSelect=document.getElementById('model');modelSelect.innerHTML='<option value="">Choisir un modèle</option>';if(models[brand]){Object.keys(models[brand]).forEach(m=>{const opt=document.createElement('option');opt.value=m;opt.textContent=m;modelSelect.appendChild(opt);});}}
-function showPrice(){const brand=document.getElementById('brand').value;const model=document.getElementById('model').value;selectedModel=model;if(brand&&model){const price=models[brand][model];selectedPrice=price;document.getElementById('price').textContent='Prix estimé : '+price+' €';}}
-function sendWhatsApp(){if(!selectedBrand||!selectedModel){alert('Veuillez choisir une marque et un modèle');return;}const msg=`Bonjour, je souhaite un devis pour une réparation d'écran.%0AMarque: ${selectedBrand}%0AModèle: ${selectedModel}%0APrix estimé: ${selectedPrice} €`;window.open(`https://wa.me/33759308014?text=${msg}`,'_blank');}
-function callNow(){window.location.href='tel:+33759308014';}
-function showTarifs(id){document.querySelectorAll('.tarifs').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:document.getElementById(id).offsetTop-20,behavior:'smooth'});}
+(function () { emailjs.init("yW0d3TOugv-oZHdwC"); })();
+
+// Formulaire EmailJS
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const message = document.getElementById("message").value.trim();
+  const status = document.getElementById("formStatus");
+
+  status.className = "form-status loading";
+  status.style.display = "block";
+  status.textContent = "⏳ Envoi du message...";
+
+  if (!name || !email || !phone || !message) {
+    status.className = "form-status error";
+    status.textContent = "❌ Tous les champs sont obligatoires.";
+    return;
+  }
+
+  emailjs.send("service_hk2mqlh", "template_cd30rti", {
+    from_name: name,
+    email: email,
+    phone: phone,
+    message: message
+  })
+  .then(function () {
+    status.className = "form-status success";
+    status.textContent = "✅ Message envoyé avec succès !";
+    document.getElementById("contactForm").reset();
+  })
+  .catch(function (error) {
+    console.error("Erreur EmailJS :", error);
+    status.className = "form-status error";
+    status.textContent = "❌ Erreur lors de l’envoi. Réessayez plus tard.";
+  });
+});
+
+// Simulateur & prix
+const models={iphone:{"iPhone 11":89,"iPhone 12":109,"iPhone 13":129,"iPhone 14":159}, samsung:{"Galaxy S21":119,"Galaxy S22":139,"Galaxy S23":169}, autre:{"Xiaomi":99,"Huawei":109,"Oppo":119}};
+function loadModels(){
+  const brand=document.getElementById('brand').value;
+  const modelSelect=document.getElementById('model');
+  modelSelect.innerHTML='<option value="">Choisir un modèle</option>';
+  if(models[brand]){
+    Object.keys(models[brand]).forEach(m=>{
+      const opt=document.createElement('option');
+      opt.value=m; opt.textContent=m;
+      modelSelect.appendChild(opt);
+    });
+  }
+}
+function showPrice(){
+  const brand=document.getElementById('brand').value;
+  const model=document.getElementById('model').value;
+  if(brand && model){
+    document.getElementById('price').textContent='Prix estimé : '+models[brand][model]+' €';
+  }
+}
+function togglePrices(id){
+  const box=document.getElementById(id);
+  if(!box) return;
+  const isVisible=box.style.display==='block';
+  document.querySelectorAll('.price-box').forEach(el=>el.style.display='none');
+  if(!isVisible){
+    box.style.display='block';
+    box.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+}
 </script>
+<!-- Bouton WhatsApp flottant -->
+<a href="https://wa.me/33759308014?text=Bonjour%20Alpha%20Lee%2C%20je%20vous%20contacte%20via%20le%20site" 
+   class="whatsapp-btn" target="_blank">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="whatsapp-icon">
+</a>
+
+
 </body>
 </html>
