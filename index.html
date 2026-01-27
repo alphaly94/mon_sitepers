@@ -4,13 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dépannage Téléphone PC Tablette & Création de Site</title>
-<link rel="stylesheet" href="style.html">
+
 
 <style>
 /* ===== RESET ET BASE ===== */
 body { margin: 0; font-family: Arial, sans-serif; background: #0b0b0b; color: #fff; }
 header { background: #000; color: #f5c400; padding: 20px; text-align: center; }
 .section { padding: 40px 20px; max-width: 1000px; margin: auto; }
+button,
+a button,
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
 /* ===== BADGES ===== */
 .badges { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
@@ -119,15 +125,17 @@ footer p {margin:5px 0; font-size:16px;}
   </div>
 
   <!-- Boutons services -->
-  <div style="text-align:center; margin:40px 0;">
+  <div style="text-align:center; margin:30px 0;">
     <div class="service-button-wrapper"><button class="service-btn" onclick="togglePrices('pc')">🖥️ PC Portable</button></div>
     <div class="service-button-wrapper"><button class="service-btn" onclick="togglePrices('mobile')">📱 Téléphonie/Tablette</button></div>
     <div class="service-button-wrapper"><button class="service-btn" onclick="togglePrices('prix-siteweb')">🌐 Création de site web</button></div>
-    <div class="service-button-wrapper"><a href="style.html" class="btn-primary">👨‍💻 À propos de moi</a></div>
+    <div class="service-button-wrapper"><button class="service-btn" onclick="togglePrices('a-propos')"><a href="style.html">👨‍💻 À propos de moi</a></button></div>
+    <div class="service-button-wrapper"><button class="service-btn" onclick="togglePrices('produits')"><a href="produit.html">🛒 Nos produits</a></button></div>
+
   </div>
 
   <!-- Simulateur -->
-  <h2 style="text-align:center">📱 Votre écran est cassé ?</h2>
+  <h2 style="text-align:center; margin-top:30px;">📱 Votre écran est cassé ?</h2>
   <div class="simulator">
     <select id="brand" onchange="loadModels()">
       <option value="">Choisir une marque</option>
@@ -154,7 +162,7 @@ footer p {margin:5px 0; font-size:16px;}
 <div id="mobile" class="price-box">
   <h2>Tarifs Téléphone</h2>
   <ul>
-    <li>écran à partir de 70 €</li>
+    <li>Ecran à partir de 70 €</li>
     <li>Changement batterie à partir de 50 €</li>
     <li>Connecteur de charge à partir de 60 €</li>
   </ul>
@@ -165,7 +173,7 @@ footer p {margin:5px 0; font-size:16px;}
   </ul>
 </div>
 
-<div id="prix-siteweb" class="price-box">
+<div id="prix-siteweb" class="price-box" style="margin-top:30px;">
   <h3>Création de site web</h3>
   <ul>
     <li>Site vitrine 1 page : <strong>199€</strong></li>
@@ -176,7 +184,7 @@ footer p {margin:5px 0; font-size:16px;}
   </ul>
 </div>
 
-<section id="contact" class="contact fade-in">
+<section id="contact" class="contact fade-in" style="margin-top:30px;">
   <h2>Contactez-nous</h2>
   <form id="contactForm">
     <input type="text" id="name" placeholder="Nom" required />
@@ -270,6 +278,16 @@ function togglePrices(id){
     box.scrollIntoView({behavior:'smooth', block:'center'});
   }
 }
+function toggleProduct(card) {
+  // fermer les autres produits ouverts
+  document.querySelectorAll('.product-card').forEach(el => {
+    if (el !== card) el.classList.remove('active');
+  });
+
+  // toggle celui cliqué
+  card.classList.toggle('active');
+}
+
 </script>
 <!-- Bouton WhatsApp flottant -->
 <a href="https://wa.me/33759308014?text=Bonjour%20Alpha%20Lee%2C%20je%20vous%20contacte%20via%20le%20site" 

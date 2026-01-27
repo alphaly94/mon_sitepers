@@ -2,66 +2,256 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>À propos de moi - Alpha Dépannage</title>
+  <title>À propos de moi – Alformatique</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Lien vers le même CSS que ton site -->
-  <link rel="stylesheet" href="input.css">
+<style>
+/* ===== BASE ===== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0b0b;
+  color: #fff;
+  line-height: 1.6;
+}
+
+header {
+  background: linear-gradient(180deg, #000, #0b0b0b);
+  color: #f5c400;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+header p {
+  color: #ddd;
+  max-width: 700px;
+  margin: auto;
+  font-size: 18px;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 60px 20px;
+}
+
+/* ===== SECTIONS ===== */
+.section-block {
+  background: #111;
+  border-radius: 20px;
+  padding: 35px 32px;        /* ↓ moins de padding */
+  margin-bottom: 30px;      /* ↓ moins d’espace entre sections */
+  box-shadow: 0 12px 30px rgba(0,0,0,.6);
+}
+
+.section-block h2 {
+  color: #f5c400;
+  margin-bottom: 18px;   /* ↓ plus serré */
+  font-size: 26px;       /* légèrement plus élégant */
+  text-align: center;
+}
+
+.section-block p {
+  color: #ddd;
+  font-size: 16px;
+  margin-bottom: 14px;   /* ↓ évite l’effet trop étalé */
+}
+
+
+/* ===== LISTES ===== */
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px 30px;
+  margin-top: 20px;
+}
+
+.list li {
+  list-style: none;
+  background: #0b0b0b;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border-left: 4px solid #f5c400;
+  font-size: 15px;
+}
+
+/* ===== SERVICES ===== */
+.services li {
+  font-size: 18px;
+  padding: 18px;
+  border-radius: 14px;
+  background: #0b0b0b;
+  border: 1px solid rgba(245,196,0,.3);
+}
+
+/* ===== BOUTONS ===== */
+.btn-back {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 16px 28px;
+  border-radius: 30px;
+  border: 3px solid #f5c400;
+  background: #000;
+  color: #f5c400;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all .3s ease;
+}
+
+.btn-back:hover {
+  background: #f5c400;
+  color: #000;
+  transform: translateY(-3px);
+}
+
+/* ===== WHATSAPP ===== */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #25d366;
+  padding: 16px 18px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,.4);
+  transition: .3s ease;
+  z-index: 1000;
+}
+.whatsapp-btn:hover { transform: scale(1.1); }
+
+.whatsapp-icon {
+  width: 26px;
+  height: 26px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width: 700px){
+  .list {
+    grid-template-columns: 1fr;
+  }
+}
+.about-mobile {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 28px 22px;
+  background: #111;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0,0,0,.6);
+}
+
+.about-mobile h1 {
+  color: #f5c400;
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+
+.about-mobile p {
+  font-size: 16px;
+  color: #ddd;
+  margin-bottom: 14px;
+}
+
+.about-points {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0;
+}
+
+.about-points li {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+.about-cta {
+  margin-top: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+</style>
 </head>
+
 <body>
 
-  <div class="container" style="text-align: center; padding: 20px;">
+<header>
+  <h1>À propos d’Alformatique</h1>
+  <p>
+    Un service humain, local et professionnel pour vos réparations
+    informatiques, téléphonie mobile et vos projets web en Île-de-France.
+  </p>
+</header>
 
-    <h1 style="text-align:center;">👨‍💻 À propos de moi</h1>
+<div class="container">
 
-    <div class="about-box">
-      <p>
-        Je m'appelle <strong>Alpha Ly</strong>, technicien indépendant spécialisé dans le 
-        <strong>dépannage de téléphones, tablettes et ordinateurs à domicile</strong>.
-      </p>
-
-      <p>
-        Passionné par l’informatique et la technologie depuis plusieurs années,  
-        j’ai décidé de proposer un service <strong>rapide, honnête et accessible</strong>  
-        pour aider les particuliers et les professionnels à réparer leurs appareils  
-        sans se déplacer.
-      </p>
-
-      <p>J’interviens directement chez vous pour :</p>
-
-      <ul>
-        <li>📱 Réparation de smartphones et tablettes</li>
-        <li>💻 Dépannage et optimisation PC</li>
-        <li>🦠 Suppression de virus</li>
-        <li>🌐 Création de sites web</li>
-      </ul>
-
-      <p>
-        Mon objectif : vous proposer un service
-        <strong>clair, efficace et au juste prix</strong>.
-      </p>
-
-      <div class="about-buttons">
-       
-          <a href="https://wa.me/33759308014" target="_blank" > <button class="btn-wa">💬 Me contacter sur WhatsApp </button></a>
-<a href="tel:+33759308014"><button class="btn-call">📞 M’appeler maintenant</button></a>
-        </div>
-        
-    
-    <div>
-      <!-- Bouton retour -->
-      <div style="text-align:center; margin-top:30px;">
-        <a href="index.html" class="btn-back">
-          ⬅️ Retour au site
-        </a>
-      </div>
-
-    </div>
-
+  <!-- PRÉSENTATION -->
+  <div class="section-block">
+    <h2>👋 Qui suis-je ?</h2>
+    <p>
+      Je m’appelle <strong>Alpha Ly</strong>, technicien informatique avec 15 ans d'expériences indépendant basé en 
+      <strong>Île-de-France</strong>.
+    </p>
+    <p>
+      J’accompagne particuliers et professionnels pour la 
+      <strong>réparation de téléphones, tablettes, ordinateurs</strong> 
+      ainsi que pour la <strong>création de sites web</strong>.
+    </p>
+    <p>
+      Contrairement aux grandes plateformes impersonnelles, vous avez ici
+      <strong>un seul interlocuteur</strong>, du premier contact jusqu’à la solution finale.
+    </p>
   </div>
 
-  <!-- Même JS que ton site principal -->
-  <script src="script.js"></script>
+  <!-- CONFIANCE -->
+  <div class="section-block">
+    <h2>🔒 Pourquoi me faire confiance ?</h2>
+
+    <ul class="list">
+      <li>✔ Intervention rapide à domicile ou à distance</li>
+      <li>✔ Devis clair et gratuit</li>
+      <li>✔ Paiement uniquement après réparation</li>
+      <li>✔ Matériel issu de fournisseurs professionnels</li>
+      <li>✔ Aucune sous-traitance</li>
+      <li>✔ Conseils honnêtes et transparents</li>
+    </ul>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="section-block">
+    <h2>🛠 Mes services</h2>
+
+    <ul class="list services">
+      <li>📱 Réparation téléphones & tablettes</li>
+      <li>💻 Dépannage informatique PC / Mac</li>
+      <li>🌐 Création de sites web professionnels</li>
+      <li>🛒 Vente d’accessoires & produits sélectionnés</li>
+    </ul>
+
+    <p style="margin-top:30px; text-align:center;">
+      <strong>Un besoin précis ou une question ?</strong><br>
+      Contactez-moi directement sur WhatsApp.
+    </p>
+  </div>
+
+  <div style="text-align:center;">
+    <a href="index.html" class="btn-back">⬅️ Retour au site</a>
+  </div>
+
+</div>
+
+<!-- WhatsApp -->
+<a href="https://wa.me/33759308014?text=Bonjour%20Alpha%20Lee%2C%20je%20vous%20contacte%20via%20le%20site"
+   class="whatsapp-btn" target="_blank">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+       class="whatsapp-icon" alt="WhatsApp">
+</a>
 
 </body>
 </html>
