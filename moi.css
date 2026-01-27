@@ -14,6 +14,11 @@
   --accent-success: #22c55e;
   --accent-warning: #fbbf24;
 }
+html, body {
+  min-height: 100%;
+  background: linear-gradient(180deg, #0e1624, #0b1220);
+}
+
 
 /* =====================================================
    RESET GLOBAL
