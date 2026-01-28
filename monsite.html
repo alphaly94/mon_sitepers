@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Alformatique — Dépannage & Création Web</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- EMAILJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<style>
+/* ========== RESET ========== */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  color: #fff;
+  line-height: 1.6;
+
+  /* IMAGE DE FOND GLOBALE */
+  background: 
+    linear-gradient(
+      rgba(0,0,0,0.65),
+      rgba(0,0,0,0.65)
+    ),
+    url("tech.jpg"); ;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+html, body {
+  min-height: 100%;
+}
+
+
+
+/* ========== LAYOUT ========== */
+.page{
+  max-width:1100px;
+  margin:auto;
+  padding:80px 20px;
+}
+section{margin-bottom:120px}
+h1{font-size:42px;margin-bottom:20px}
+h2{font-size:28px;margin-bottom:30px}
+p{color:#ccc;font-size:18px;max-width:720px}
+
+/* ========== HERO ========== */
+.hero{text-align:center}
+.hero p{margin:20px auto 40px}
+.btn-main{
+  display:inline-block;
+  padding:16px 36px;
+  border-radius:40px;
+  background:#f5c400;
+  color:#000;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+/* ========== SERVICES ========== */
+.services{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:40px;
+}
+.service{
+  background:#111;
+  padding:40px;
+  border-radius:24px;
+  cursor:pointer;
+  transition:.25s;
+}
+.service:hover{transform:translateY(-6px)}
+.service h3{color:#f5c400;margin-bottom:10px}
+
+/* ========== SECTIONS OUVRANTES ========== */
+.box{
+  display:none;
+  max-width:900px;
+  margin:60px auto 0;
+  padding:50px;
+  background:#111;
+  border-radius:28px;
+}
+.box h2{text-align:center;margin-bottom:30px}
+.box ul{list-style:none}
+.box li{
+  padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,.1);
+  font-size:18px;
+}
+.box strong{color:#f5c400}
+
+/* ========== SIMULATEUR ========== */
+.simulator{
+  margin-top:40px;
+  padding:30px;
+  background:#0b0b0b;
+  border-radius:20px;
+}
+select{
+  width:100%;
+  padding:14px;
+  margin-bottom:14px;
+  border-radius:10px;
+  background:#000;
+  color:#fff;
+  border:1px solid #444;
+}
+#price{color:#f5c400;font-size:22px;font-weight:bold}
+
+/* ========== PRODUITS ========== */
+.product-grid{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+.product-card{
+  display:flex;
+  gap:24px;
+  background:#0b0b0b;
+  padding:20px;
+  border-radius:20px;
+}
+.product-img{
+  width:140px;
+  height:140px;
+  overflow:hidden;
+  border-radius:16px;
+}
+.product-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.35s;
+}
+.product-img:hover img{transform:scale(1.2)}
+.product-info h3{color:#f5c400;margin-bottom:8px}
+.product-price{font-size:20px;font-weight:bold;margin-bottom:12px}
+.buy-btn{
+  display:inline-block;
+  padding:12px 26px;
+  background:#f5c400;
+  color:#000;
+  border-radius:30px;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+
+
+/* ========== FORMULAIRE ========== */
+form input,form textarea{
+  width:100%;
+  padding:16px;
+  margin-bottom:16px;
+  border-radius:14px;
+  background:#000;
+  border:1px solid #444;
+  color:#fff;
+}
+form button{
+  width:100%;
+  padding:16px;
+  border-radius:30px;
+  border:none;
+  background:#f5c400;
+  color:#000;
+  font-weight:bold;
+}
+.form-status{margin-top:15px;font-weight:bold}
+
+/* ========== WHATSAPP ========== */
+.whatsapp{
+  position:fixed;
+  bottom:24px;
+  right:24px;
+  background:#25d366;
+  padding:16px 22px;
+  border-radius:50px;
+  font-weight:bold;
+  color:#000;
+  text-decoration:none;
+}
+
+/* ========== MOBILE ========== */
+@media(max-width:768px){
+  h1{font-size:30px}
+  h2{font-size:22px}
+  section{margin-bottom:80px}
+  .product-card{flex-direction:column;align-items:center;text-align:center}
+}
+/* ===== ZOOM IMAGE OVERLAY ===== */
+.image-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.image-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 20px;
+  animation: zoomIn .25s ease;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+/* ===== A PROPOS : FOND IMAGE + ZOOM ===== */
+.box.about {
+  position: relative;
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("tech.jpg") center / 110% no-repeat;
+  animation: bgZoom 1.2s ease-out forwards;
+}
+
+/* contenu au-dessus de l’image */
+.box.about * {
+  position: relative;
+  z-index: 2;
+}
+
+/* animation zoom léger */
+@keyframes bgZoom {
+  from {
+    background-size: 115%;
+  }
+  to {
+    background-size: 100%;
+  }
+}
+/* ===== EFFET FOND IMAGE + ZOOM (SECTIONS) ===== */
+.box.bg-image {
+  position: relative;
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    center / 110% no-repeat;
+  animation: bgZoom 1.2s ease-out forwards;
+}
+
+/* contenu au-dessus */
+.box.bg-image * {
+  position: relative;
+  z-index: 2;
+}
+
+/* animation zoom */
+@keyframes bgZoom {
+  from { background-size: 115%; }
+  to   { background-size: 100%; }
+}
+/* =================================================
+   RESPONSIVE MOBILE / TABLETTE
+================================================= */
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .page {
+    padding: 50px 16px;
+  }
+
+  /* TITRES */
+  h1 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  /* HERO */
+  .hero p {
+    margin: 16px auto 28px;
+  }
+
+  .btn-main {
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+
+  /* SERVICES */
+  .services {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .service {
+    padding: 28px;
+    border-radius: 20px;
+  }
+
+  /* BOX OUVRANTES */
+  .box {
+    width: 100%;
+    margin: 40px auto 0;
+    padding: 28px 22px;
+    border-radius: 22px;
+  }
+
+  .box h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .box li {
+    font-size: 16px;
+  }
+
+  /* PRODUITS */
+  .product-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .product-img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .product-info {
+    width: 100%;
+  }
+
+  .product-price {
+    font-size: 18px;
+  }
+
+  .buy-btn {
+    width: 100%;
+    text-align: center;
+    padding: 14px;
+  }
+
+  /* FORMULAIRE */
+  form input,
+  form textarea {
+    font-size: 16px;
+    padding: 14px;
+  }
+
+  form button {
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  /* WHATSAPP */
+  .whatsapp {
+    bottom: 16px;
+    right: 16px;
+    padding: 14px 18px;
+    font-size: 14px;
+  }
+
+  /* IMAGE DE FOND DES SECTIONS */
+  .box.bg-image {
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Dépannage informatique & téléphonie<br>en Île-de-France</h1>
+  <p>Réparation, création de site, produits & accompagnement humain.</p>
+  <a href="#" class="btn-main" onclick="openBox('contact')">Demander un devis</a>
+</section>
+
+<!-- SERVICES -->
+<section>
+  <h2>Services</h2>
+  <div class="services">
+    <div class="service" onclick="openBox('phone')">
+      <h3>📱 Téléphones & Tablettes</h3>
+      <p>Écrans, batteries, connecteurs</p>
+    </div>
+    <div class="service" onclick="openBox('pc')">
+      <h3>💻 Ordinateurs</h3>
+      <p>PC & Mac, virus, lenteurs</p>
+    </div>
+    <div class="service" onclick="openBox('web')">
+      <h3>🌐 Création de site</h3>
+      <p>Sites modernes & efficaces</p>
+    </div>
+    <div class="service" onclick="openBox('products')">
+      <h3>🛒 Nos produits</h3>
+      <p>Accessoires & matériel</p>
+    </div>
+    <div class="service" onclick="openBox('about')">
+  <h3>👤 À propos de moi</h3>
+  <p>Qui nous sommes & notre façon de travailler</p>
+</div>
+  </div>
+</section>
+
+<!-- TELEPHONIE -->
+<div class="box bg-image" id="phone"
+     style="background-image:
+       linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+       url('tel.jpg');">
+
+  <h2>📱 Téléphones & Tablettes</h2>
+  <ul>
+    <li>Écran — <strong>à partir de 70 €</strong></li>
+    <li>Batterie — <strong>à partir de 50 €</strong></li>
+    <li>Connecteur — <strong>à partir de 60 €</strong></li>
+  </ul>
+
+  <div class="simulator">
+    <select id="brand" onchange="loadModels()">
+      <option value="">Marque</option>
+      <option value="iphone">iPhone</option>
+      <option value="samsung">Samsung</option>
+      <option value="autre">Autre</option>
+    </select>
+    <select id="model" onchange="showPrice()">
+      <option value="">Modèle</option>
+    </select>
+    <div id="price"></div>
+  </div>
+</div>
+
+<!-- PC -->
+<div class="box bg-image" id="pc"
+     style="background-image:
+       linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+       url('pc.jpg');">
+  <h2>💻 Dépannage PC / Mac</h2>
+  <ul>
+    <li>Diagnostic — <strong>20 €</strong></li>
+    <li>Nettoyage — <strong>50 €</strong></li>
+    <li>Virus — <strong>60 €</strong></li>
+  </ul>
+</div>
+
+<!-- WEB -->
+<div class="box bg-image" id="web"
+     style="background-image:
+       linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+       url('dev.jpg');">
+  <h2>🌐 Création de site</h2>
+  <ul>
+    <li>1 page — <strong>199 €</strong></li>
+    <li>3–5 pages — <strong>349 €</strong></li>
+    <li>Pro — <strong>599 €</strong></li>
+  </ul>
+</div>
+
+<!-- PRODUITS -->
+<div class="box bg-image" id="products"
+     style="background-image:
+       linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+       url('hangar.jpg');">
+  <h2>🛒 Nos produits</h2>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-img"><img src="magsafe.webp"></div>
+      <div class="product-info">
+        <h3>Coque MagSafe</h3>
+        <div class="product-price">12,90 €</div>
+        <a href="produit.html" class="buy-btn">Acheter</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img"><img src="verres trempés.jpg"></div>
+      <div class="product-info">
+        <h3>Verre trempé</h3>
+        <div class="product-price">Bientôt</div>
+<a href="#" class="buy-btn" onclick="openImage(event,'verres trempés.jpg')">Voir</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img"><img src="usbc.jpg"></div>
+      <div class="product-info">
+        <h3>Câble USB-C</h3>
+        <div class="product-price">Bientôt</div>
+<a href="#" class="buy-btn" onclick="openImage(event,'usbc.jpg')">Voir</a>
+      </div>
+  </div>
+</div>
+    <div class="product-card">
+      <div class="product-img"><img src="iphone.jpg"></div>
+      <div class="product-info">
+        <h3>iPhone reconditionné</h3>
+        <div class="product-price">Bientôt</div>
+        <a href="#" class="buy-btn" onclick="openImage(event,'iphone.jpg')">Voir</a>
+      </div>
+    </div>
+  </div>
+</div>  
+<!-- A PROPOS -->
+<div class="box about" id="about">
+  <h2>👤 À propos de nous</h2>
+
+  <p style="margin-bottom:20px">
+    <strong>Alformatique</strong>, c’est un service local et indépendant
+    basé en <strong>Île-de-France</strong>.
+  </p>
+
+  <p style="margin-bottom:20px">
+    Nous accompagnons particuliers et professionnels pour la
+    <strong>réparation de téléphones, tablettes, ordinateurs</strong>
+    ainsi que la <strong>création de sites web</strong>.
+  </p>
+
+  <p style="margin-bottom:20px">
+    Ici, pas de plateforme impersonnelle :
+    <strong>un seul interlocuteur</strong>,
+    des explications claires et un travail propre.
+  </p>
+
+  <p>
+    📞 Besoin d’un conseil ou d’un devis ?
+    Utilisez le bouton WhatsApp ou le formulaire.
+  </p>
+</div>
+
+
+
+<!-- FORMULAIRE -->
+<div class="box bg-image" id="contact"
+     style="background-image:
+       linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+       url('form.png');">
+<h2>Demande client</h2>
+  <form id="contactForm">
+    <input id="name" type="name" placeholder="Nom" required>
+    <input id="email" type="email" placeholder="Email" required>
+    <input id="phone" type="tel" placeholder="Téléphone" required>
+    <textarea id="message" placeholder="Votre demande" required></textarea>
+    <button>Envoyer</button>
+    <div id="formStatus" class="form-status"></div>
+  </form>
+</div>
+
+</div>
+
+<a class="whatsapp" href="https://wa.me/33759308014" target="_blank">WhatsApp</a>
+
+<script>
+emailjs.init("yW0d3TOugv-oZHdwC");
+
+function openBox(id){
+  document.querySelectorAll(".box").forEach(b=>b.style.display="none");
+  const box=document.getElementById(id);
+  box.style.display="block";
+  box.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+const models={
+  iphone:{"iPhone 11":89,"iPhone 12":109,"iPhone 13":129},
+  samsung:{"Galaxy S21":119,"Galaxy S22":139},
+  autre:{"Xiaomi":99}
+};
+
+function loadModels(){
+  const brand=document.getElementById("brand").value;
+  const model=document.getElementById("model");
+  model.innerHTML='<option value="">Modèle</option>';
+  if(models[brand]){
+    Object.keys(models[brand]).forEach(m=>{
+      model.innerHTML+=`<option>${m}</option>`;
+    });
+  }
+}
+
+function showPrice(){
+  const b=brand.value,m=model.value;
+  if(b&&m) price.textContent="Prix estimé : "+models[b][m]+" €";
+}
+
+contactForm.addEventListener("submit",e=>{
+  e.preventDefault();
+  formStatus.textContent="⏳ Envoi...";
+  emailjs.send("service_hk2mqlh","template_cd30rti",{
+    from_name:name.value,email:email.value,phone:phone.value,message:message.value
+  }).then(()=>{
+    formStatus.textContent="✅ Message envoyé";
+    contactForm.reset();
+  }).catch(()=>formStatus.textContent="❌ Erreur");
+});
+function openImage(e, src) {
+  e.preventDefault();
+  const overlay = document.getElementById("imageOverlay");
+  const img = document.getElementById("overlayImg");
+  img.src = src;
+  overlay.style.display = "flex";
+}
+
+function closeImage() {
+  const overlay = document.getElementById("imageOverlay");
+  overlay.style.display = "none";
+  document.getElementById("overlayImg").src = "";
+}
+
+</script>
+<!-- IMAGE ZOOM OVERLAY -->
+<div class="image-overlay" id="imageOverlay" onclick="closeImage()">
+  <img id="overlayImg" src="" alt="">
+</div>
+
+</body>
+</html>
